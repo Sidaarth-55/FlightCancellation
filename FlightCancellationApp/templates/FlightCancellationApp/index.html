@@ -1,0 +1,27 @@
+{% block content %}
+
+<div>
+    <h1>Welcome!</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            {{form.name}}
+        </div>
+
+        <div>
+            {{form.file}}
+        </div>
+
+        <input type="submit"
+        value="Submit"
+        >
+    </form>
+
+    
+
+</div>
+
+
+{% endblock %}
