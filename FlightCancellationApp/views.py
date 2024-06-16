@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from FlightCancellationApp.forms import PDFform
 from FlightCancellationApp.models import PDF
-from FlightCancellationApp.summarize import *
+from FlightCancellationApp.QuestionAnswer import *
 import os
 # Create your views here.
 
@@ -18,5 +18,11 @@ def upload_form(request):
     return render(request, 'FlightCancellationApp/index.html',context)
 
 def output(request):
-    output=pdf_to_text("/Users/sid/Desktop/Flight Cancellation Project/media/free-full-refund-tnc.pdf")
+    LatestRecord=PDF.objects.last()
+    question=LatestRecord.question
+    base_dir='/Users/sid/Desktop/Flight Cancellation Project/media/'
+    path=os.listdir(base_dir)
+    text=file_to_text(base_dir+path[0])
+    output=QA(question,text)
+    os.remove(base_dir+path[0])
     return render(request, 'FlightCancellationApp/results.html', {'outputs':output})
