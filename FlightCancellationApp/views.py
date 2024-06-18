@@ -25,4 +25,6 @@ def output(request):
     text=file_to_text(base_dir+path[0])
     output=QA(question,text)
     os.remove(base_dir+path[0])
-    return render(request, 'FlightCancellationApp/results.html', {'outputs':output})
+    form=PDFform(request.POST, request.FILES)
+    context={'form': form,'outputs': output}
+    return render(request, 'FlightCancellationApp/results.html', context)

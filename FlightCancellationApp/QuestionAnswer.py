@@ -32,7 +32,7 @@ def QA(question,context):
     tokenizer=AutoTokenizer.from_pretrained("meta-llama/llama-2-7b-chat-hf", cache_dir="/users/sid/LLMs")
 
     inputs=tokenizer(prompt, return_tensors="pt").to('mps')
-    outputs=model.generate(**inputs, max_new_tokens=20, temperature=0.1)
+    outputs=model.generate(**inputs, max_new_tokens=20, temperature=0.05)
     response= tokenizer.decode(outputs[0],skip_special_tokens=True)
 
     
